@@ -7,6 +7,7 @@ namespace Src\Task\Application\UseCases;
 
 
 use Exception;
+
 use Src\Category\Application\UseCases\GetCategory;
 use Src\Category\Domain\Category;
 use Src\Category\Domain\ValueObjects\CategoryIdVo;
@@ -38,7 +39,7 @@ final class CreateTask
      */
     public function __invoke(TaskCreateRequest $request): void
     {
-        $category = ($this->get_category)(new IdRequest($request->getCategory()));
+        $category = ($this->get_category)(new IdRequest($request->getCategoryId()));
 
         $task = Task::create(
             new TaskNameVo($request->getName()),
@@ -49,7 +50,6 @@ final class CreateTask
                 new CreatedAtVO($category->getCreatedAt()),
                 new UpdatedAtVO($category->getUpdatedAt())
             ),
-            new TaskCompleteVo($request->getComplete()),
             new TaskStartDateVo($request->getStartDate()),
             new TaskFinishDateVo($request->getFinishDate())
         );

@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace Src\Task\Infrastructure\Controller;
 
 
+use Carbon\Carbon;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -29,15 +30,14 @@ final class TaskPutController
         ($this->update_task)(
             new IdRequest($id),
             new TaskUpdateRequest(
-            $request['id'],
-            $request['name'],
-            $request['category'],
-            $request['complete'],
-            $request['start_date'],
-            $request['finish_date'],
-            intval($request['active']),
-            $request['created_at'],
-            $request['updated_at'],
-        ));
+                intval($request['id']),
+                $request['name'],
+                intval($request['category_id']),
+                intval($request['complete']),
+                $request['start_date'],
+                $request['finish_date'],
+                intval($request['active']),
+                $request['created_at']
+            ));
     }
 }

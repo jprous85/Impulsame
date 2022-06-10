@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace Src\Category\Domain;
 
 
+use Carbon\Carbon;
 use Src\Category\Domain\ValueObjects\CategoryIdVo;
 use Src\Category\Domain\ValueObjects\CategoryNameVo;
 use Src\Shared\Domain\ValueObjects\ActiveVo;
@@ -33,7 +34,7 @@ final class Category
             new CategoryIdVo(null),
             $name,
             new ActiveVo(1),
-            new CreatedAtVO(null),
+            new CreatedAtVO(Carbon::now()->format('Y-m-d h:i:s')),
             new UpdatedAtVO(null)
         );
     }
@@ -43,8 +44,9 @@ final class Category
         ActiveVo       $active
     )
     {
-        $this->name   = $name;
-        $this->active = $active;
+        $this->name       = $name;
+        $this->active     = $active;
+        $this->updated_at = new UpdatedAtVO(Carbon::now()->format('Y-m-d h:i:s'));
     }
 
 

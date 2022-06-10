@@ -117,6 +117,7 @@ final class TaskResponse
             $task->getId()->value(),
             $task->getName()->value(),
             $task->getCategory()->getPrimitives(),
+            $task->getComplete()->value(),
             $task->getStartDate()->value(),
             $task->getFinisDate()->value(),
             $task->getActive()->value(),

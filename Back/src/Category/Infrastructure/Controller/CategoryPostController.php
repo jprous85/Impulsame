@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace Src\Category\Infrastructure\Controller;
 
 
+use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\Request;
 
 use Src\Category\Application\Request\CategoryCreateRequest;
@@ -22,11 +23,8 @@ final class CategoryPostController
     {
         ($this->create_category)(
             new CategoryCreateRequest(
-                $request['id'],
                 $request['name'],
-                intval($request['active']),
-                $request['created_at'],
-                $request['updated_at'],
+                intval($request['active'])
             )
         );
     }

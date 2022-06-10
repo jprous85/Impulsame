@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace Src\Category\Infrastructure\Persistence;
 
 
+use Carbon\Carbon;
 use Src\Category\Domain\Category;
 use Src\Category\Domain\Repositories\CategoryRepository;
 use Src\Category\Domain\ValueObjects\CategoryIdVo;
@@ -54,12 +55,13 @@ final class CategoryMYSQLRepository implements CategoryRepository
 
     private function map($request): ? Category
     {
+
         return $request ? new Category(
             new CategoryIdVo($request->id),
             new CategoryNameVo($request->name),
             new ActiveVo($request->active),
-            new CreatedAtVO($request->created_at),
-            new UpdatedAtVO($request->updated_at)
+            new CreatedAtVO($request->created_at?->format('Y-m-d h:i')),
+            new UpdatedAtVO($request->updated_at?->format('Y-m-d h:i'))
         ) : null;
     }
 }

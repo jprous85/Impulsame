@@ -7,6 +7,6 @@ use Src\Task\Infrastructure\Controller\TaskPutController;
 
 Route::get('/{id}', [TaskGetController::class, 'getTask']);
 Route::get('/', [TaskGetController::class, 'getAllTasks']);
-Route::get('/create', [TaskPostController::class, 'create']);
-Route::get('/update/{id}', [TaskPutController::class, 'update']);
-Route::get('/delete/{id}', [TaskDeleteController::class, 'delete']);
+Route::post('/create', [TaskPostController::class, 'create']);
+Route::post('/update/{id}', [TaskPutController::class, 'update']);
+Route::delete('/delete/{id}', [TaskDeleteController::class, 'delete']);

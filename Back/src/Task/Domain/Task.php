@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace Src\Task\Domain;
 
 
+use Carbon\Carbon;
 use Src\Category\Domain\Category;
 use Src\Shared\Domain\ValueObjects\ActiveVo;
 use Src\Shared\Domain\ValueObjects\CreatedAtVO;
@@ -35,7 +36,6 @@ final class Task
     public static function create(
         TaskNameVo       $name,
         Category         $category,
-        TaskCompleteVo   $complete,
         TaskStartDateVo  $start_date,
         TaskFinishDateVo $finis_date,
     ): self
@@ -44,11 +44,11 @@ final class Task
             new TaskIdVo(null),
             $name,
             $category,
-            $complete,
+            new TaskCompleteVo(0),
             $start_date,
             $finis_date,
             new ActiveVo(1),
-            new CreatedAtVO(null),
+            new CreatedAtVO(Carbon::now()->format('Y-m-d h:i')),
             new UpdatedAtVO(null)
         );
     }
@@ -68,6 +68,7 @@ final class Task
         $this->start_date = $start_date;
         $this->finis_date = $finis_date;
         $this->active     = $active;
+        $this->updated_at = new UpdatedAtVO(Carbon::now()->format('Y-m-d h:i'));
     }
 
     /**
@@ -145,15 +146,15 @@ final class Task
     public function getPrimitives(): array
     {
         return [
-            'id'         => $this->getId()->value(),
-            'name'       => $this->getName()->value(),
-            'category'   => $this->getCategory()->getPrimitives(),
-            'complete'   => $this->getComplete()->value(),
-            'start_date' => $this->getStartDate()->value(),
-            'finis_date' => $this->getFinisDate()->value(),
-            'active'     => $this->getActive()->value(),
-            'created_at' => $this->getCreatedAt()->value(),
-            'updated_at' => $this->getUpdatedAt()->value()
+            'id'          => $this->getId()->value(),
+            'name'        => $this->getName()->value(),
+            'category'    => $this->getCategory()->getPrimitives(),
+            'complete'    => $this->getComplete()->value(),
+            'start_date'  => $this->getStartDate()->value(),
+            'finish_date' => $this->getFinisDate()->value(),
+            'active'      => $this->getActive()->value(),
+            'created_at'  => $this->getCreatedAt()->value(),
+            'updated_at'  => $this->getUpdatedAt()->value()
         ];
     }
 }

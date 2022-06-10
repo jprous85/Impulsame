@@ -28,7 +28,7 @@ final class CategoryGetController
     {
         return new JsonResponse(
             [
-                'data' => ($this->get_all_categories)(),
+                'data' => ($this->get_all_categories)()->toArray(),
                 'code' => Response::HTTP_OK
             ]
         );
@@ -41,7 +41,7 @@ final class CategoryGetController
     {
         return new JsonResponse(
             [
-                'data' => ($this->get_category)(new IdRequest($id)),
+                'data' => ($this->get_category)(new IdRequest($id))->toArray(),
                 'code' => Response::HTTP_OK
             ]
         );

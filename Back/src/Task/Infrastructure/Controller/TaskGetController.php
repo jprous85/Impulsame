@@ -28,7 +28,7 @@ final class TaskGetController
     {
         return new JsonResponse(
             [
-                'data' => ($this->get_all_tasks)(),
+                'data' => ($this->get_all_tasks)()->toArray(),
                 'code' => Response::HTTP_OK
             ]
         );
@@ -41,7 +41,7 @@ final class TaskGetController
     {
         return new JsonResponse(
             [
-                'data' => ($this->get_task)(new IdRequest($id)),
+                'data' => ($this->get_task)(new IdRequest($id))->toArray(),
                 'code' => Response::HTTP_OK
             ]
         );

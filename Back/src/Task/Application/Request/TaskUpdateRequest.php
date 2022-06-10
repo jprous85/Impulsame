@@ -17,7 +17,6 @@ final class TaskUpdateRequest
         private ?string $finish_date,
         private int $active,
         private string $created_at,
-        private ?string $updated_at
     )
     {
     }
@@ -87,11 +86,4 @@ final class TaskUpdateRequest
         return $this->created_at;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getUpdatedAt(): ?string
-    {
-        return $this->updated_at;
-    }
 }

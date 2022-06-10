@@ -25,15 +25,10 @@ final class TaskPostController
     public function create(Request $request): void
     {
         ($this->create_task)(new TaskCreateRequest(
-            $request['id'],
             $request['name'],
-            $request['category'],
-            $request['complete'],
+            intval($request['category_id']),
             $request['start_date'],
             $request['finish_date'],
-            intval($request['active']),
-            $request['created_at'],
-            $request['updated_at'],
         ));
     }
 }
